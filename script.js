@@ -1,12 +1,7 @@
-let x = 100;
-let y = 100;
-let vx = 0;
-let vy = 0;
+let rotX = 0;
+let rotY = 0;
 
-const speed = 3;
-const box = document.getElementById("box");
-
-// Track which keys are pressed
+const cube = document.getElementById("cube");
 const keys = {};
 
 document.addEventListener("keydown", (e) => {
@@ -18,20 +13,14 @@ document.addEventListener("keyup", (e) => {
 });
 
 function animate() {
-  // Horizontal movement
-  if (keys["ArrowRight"]) vx = speed;
-  else if (keys["ArrowLeft"]) vx = -speed;
-  else vx = 0;
+  const speed = 2;
 
-  // Vertical movement
-  if (keys["ArrowDown"]) vy = speed;
-  else if (keys["ArrowUp"]) vy = -speed;
-  else vy = 0;
+  if (keys["ArrowUp"]) rotX -= speed;
+  if (keys["ArrowDown"]) rotX += speed;
+  if (keys["ArrowLeft"]) rotY -= speed;
+  if (keys["ArrowRight"]) rotY += speed;
 
-  x += vx;
-  y += vy;
-
-  box.style.transform = `translate(${x}px, ${y}px)`;
+  cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 
   requestAnimationFrame(animate);
 }
